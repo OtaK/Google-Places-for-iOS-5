@@ -16,6 +16,7 @@
 // limitations under the License.
 
 #import "GooglePlacesConnection.h"
+#import "define.h"
 
 @implementation GooglePlacesConnection
 
@@ -56,7 +57,7 @@
     types = [types urlEncodedString];
     
     NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=500&types=%@&sensor=true&key=%@",
-                                    centerLat, centerLng, types, kGOOGLE_API_KEY];
+                                    centerLat, centerLng, types, GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
@@ -92,7 +93,7 @@
     types = [types urlEncodedString];
     
     NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=1000&types=%@&name=%@&sensor=true&key=%@",
-                                    centerLat, centerLng, types, query, kGOOGLE_API_KEY];
+                                    centerLat, centerLng, types, query, GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
@@ -115,7 +116,7 @@
 {	
         
     NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@",
-                       reference, kGOOGLE_API_KEY];
+                       reference, GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
