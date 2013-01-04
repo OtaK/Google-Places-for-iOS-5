@@ -87,11 +87,11 @@ distanceInFeet:(NSString *)distanceFeet
 -(id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms andUserCoordinates:(CLLocationCoordinate2D)userCoords
 {
     
-    NSDictionary *geo = [jsonResultDict objectForKey:@"geometry"];
-    NSDictionary *loc = [geo objectForKey:@"location"];
+    NSDictionary *geo = jsonResultDict[@"geometry"];
+    NSDictionary *loc = geo[@"location"];
     
     //Figure out Distance from POI and User
-    CLLocation *poi = [[CLLocation alloc] initWithLatitude:[[loc objectForKey:@"lat"] doubleValue]  longitude:[[loc objectForKey:@"lng"] doubleValue]];
+    CLLocation *poi = [[CLLocation alloc] initWithLatitude:[loc[@"lat"] doubleValue]  longitude:[loc[@"lng"] doubleValue]];
     CLLocation *user = [[CLLocation alloc] initWithLatitude:userCoords.latitude longitude:userCoords.longitude];
     CLLocationDistance inFeet = ([user distanceFromLocation:poi]) * 3.2808;
     
@@ -102,21 +102,21 @@ distanceInFeet:(NSString *)distanceFeet
     
     //NSLog(@"Total Distance %@ in feet, distance in files %@",distanceInFeet, distanceInMiles);
         
-	return [self initWithName:[jsonResultDict objectForKey:@"name"] 
-              latitude:[[loc objectForKey:@"lat"] doubleValue] 
-             longitude:[[loc objectForKey:@"lng"] doubleValue]
-             placeIcon:[jsonResultDict objectForKey:@"icon"] 
-                rating:[jsonResultDict objectForKey:@"rating"]
-              vicinity:[jsonResultDict objectForKey:@"vicinity"]
-                  type:[jsonResultDict objectForKey:@"types"]
-             reference:[jsonResultDict objectForKey:@"reference"]
-                   url:[jsonResultDict objectForKey:@"url"]
-     addressComponents:[jsonResultDict objectForKey:@"address_components"]
-      formattedAddress:[jsonResultDict objectForKey:@"formatted_address"]
-  formattedPhoneNumber:[jsonResultDict objectForKey:@"formatted_phone_number"]
-            website:[jsonResultDict objectForKey:@"website"]
-           internationalPhone:[jsonResultDict objectForKey:@"international_phone_number"] 
-     searchTerms:[jsonResultDict objectForKey:terms]
+	return [self initWithName:jsonResultDict[@"name"]
+              latitude:[loc[@"lat"] doubleValue]
+             longitude:[loc[@"lng"] doubleValue]
+             placeIcon:jsonResultDict[@"icon"]
+                rating:jsonResultDict[@"rating"]
+              vicinity:jsonResultDict[@"vicinity"]
+                  type:jsonResultDict[@"types"]
+             reference:jsonResultDict[@"reference"]
+                   url:jsonResultDict[@"url"]
+     addressComponents:jsonResultDict[@"address_components"]
+      formattedAddress:jsonResultDict[@"formatted_address"]
+  formattedPhoneNumber:jsonResultDict[@"formatted_phone_number"]
+            website:jsonResultDict[@"website"]
+           internationalPhone:jsonResultDict[@"international_phone_number"]
+     searchTerms:jsonResultDict[terms]
                distanceInFeet:distanceInFeet
 distanceInMiles:distanceInMiles     
             ];
