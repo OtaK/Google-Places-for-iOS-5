@@ -16,7 +16,6 @@
 // limitations under the License.
 
 #import "GooglePlacesConnection.h"
-#import "../GTM/GTMNSString+URLArguments.h"
 
 @implementation GooglePlacesConnection
 
@@ -54,7 +53,7 @@
     double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
     
-    types = [types gtm_stringByEscapingForURLArgument];
+    types = [types urlEncodedString];
     
     NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=500&types=%@&sensor=true&key=%@",
                                     centerLat, centerLng, types, kGOOGLE_API_KEY];
@@ -89,8 +88,8 @@
 	double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
     
-    query = [query gtm_stringByEscapingForURLArgument];
-    types = [types gtm_stringByEscapingForURLArgument];
+    query = [query urlEncodedString];
+    types = [types urlEncodedString];
     
     NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=1000&types=%@&name=%@&sensor=true&key=%@",
                                     centerLat, centerLng, types, query, kGOOGLE_API_KEY];
@@ -156,13 +155,10 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn 
 {
     connectionIsActive          = NO;
-
-    SBJsonParser *json          = [[SBJsonParser alloc] init];
-    
 	NSString *responseString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];	
 	NSError *jsonError          = nil;
 	
-	NSDictionary *parsedJSON    = [json objectWithString:responseString error:&jsonError];
+	NSDictionary *parsedJSON    = [responseString objectFromJSONString];
     
 	if ([jsonError code]==0) 
     {
