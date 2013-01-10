@@ -56,8 +56,8 @@
     
     types = [types urlEncodedString];
     
-    NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&sensor=true&key=%@",
-                                    centerLat, centerLng, types, GOOGLE_API_KEY];
+    NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&sensor=true&language=%@&key=%@",
+                                    centerLat, centerLng, types, [[NSLocale preferredLanguages] objectAtIndex:0], GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
@@ -92,8 +92,8 @@
     query = [query urlEncodedString];
     types = [types urlEncodedString];
     
-    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&name=%@&sensor=true&key=%@",
-                                    centerLat, centerLng, types, query, GOOGLE_API_KEY];
+    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&name=%@&sensor=true&language=%@&key=%@",
+                                    centerLat, centerLng, types, query, [[NSLocale preferredLanguages] objectAtIndex:0], GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
