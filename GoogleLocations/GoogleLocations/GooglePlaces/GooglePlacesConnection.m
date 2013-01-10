@@ -92,7 +92,7 @@
     query = [query urlEncodedString];
     types = [types urlEncodedString];
     
-    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&name=%@&sensor=true&language=%@&key=%@",
+    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?location=%f,%f&radius=50000&types=%@&query=%@&sensor=true&language=%@&key=%@",
                                     centerLat, centerLng, types, query, [[NSLocale preferredLanguages] objectAtIndex:0], GOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
