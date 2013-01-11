@@ -47,7 +47,7 @@
     }
 
     //NEW setting userlocation to the coords passed in for later use
-    userLocation = coords;
+    self.userLocation = coords;
 
     double centerLat = coords.latitude;
     double centerLng = coords.longitude;
@@ -63,12 +63,12 @@
 
     [self cancelGetGoogleObjects];
 
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
-    if (connection)
+    if (self.connection)
     {
-        responseData = [NSMutableData data];
-        connectionIsActive = YES;
+        self.responseData = [NSMutableData data];
+        self.connectionIsActive = YES;
     }
     else
     {
@@ -89,7 +89,7 @@
     }
 
     //NEW setting userlocation to the coords passed in for later use
-    userLocation = coords;
+    self.userLocation = coords;
 
     double centerLat = coords.latitude;
     double centerLng = coords.longitude;
@@ -106,12 +106,12 @@
 
     [self cancelGetGoogleObjects];
 
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
-    if (connection)
+    if (self.connection)
     {
-        responseData = [NSMutableData data];
-        connectionIsActive = YES;
+        self.responseData = [NSMutableData data];
+        self.connectionIsActive = YES;
     }
     else
     {
@@ -137,12 +137,12 @@
 
     [self cancelGetGoogleObjects];
 
-    connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
-    if (connection)
+    if (self.connection)
     {
-        responseData = [NSMutableData data];
-        connectionIsActive = YES;
+        self.responseData = [NSMutableData data];
+        self.connectionIsActive = YES;
     }
     else
     {
@@ -153,24 +153,24 @@
 
 - (void)connection:(NSURLConnection *)conn didReceiveResponse:(NSURLResponse *)response
 {
-    [responseData setLength:0];
+    [self.responseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data
 {
-    [responseData appendData:data];
+    [self.responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)conn didFailWithError:(NSError *)error
 {
-    connectionIsActive = NO;
+    self.connectionIsActive = NO;
     [self.delegate googlePlacesConnection:self didFailWithError:error];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)conn
 {
-    connectionIsActive = NO;
-    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    self.connectionIsActive = NO;
+    NSString *responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     NSError *jsonError = nil;
 
     NSDictionary *parsedJSON = [responseString objectFromJSONString];
@@ -187,7 +187,7 @@
                 NSDictionary *gResponseDetailData = [parsedJSON objectForKey:@"result"];
                 NSMutableArray *googlePlacesDetailObject = [NSMutableArray arrayWithCapacity:1];  //Hard code since ONLY 1 result will be coming back
 
-                GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData andUserCoordinates:userLocation];
+                GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData andUserCoordinates:self.userLocation];
                 [googlePlacesDetailObject addObject:detailObject];
 
                 [self.delegate googlePlacesConnection:self didFinishLoadingWithGooglePlacesObjects:googlePlacesDetailObject];
@@ -206,7 +206,7 @@
 
                 for (int x = 0; x < [googlePlacesObjects count]; x++)
                 {
-                    GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x] andUserCoordinates:userLocation];
+                    GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x] andUserCoordinates:self.userLocation];
                     [googlePlacesObjects replaceObjectAtIndex:x withObject:object];
                 }
 
@@ -256,7 +256,7 @@
 
 - (void)cancelGetGoogleObjects
 {
-    if (connectionIsActive == YES)
-        connectionIsActive = NO;
+    if (self.connectionIsActive == YES)
+        self.connectionIsActive = NO;
 }
 @end

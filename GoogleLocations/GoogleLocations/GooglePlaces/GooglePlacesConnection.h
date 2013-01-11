@@ -21,14 +21,6 @@
 @protocol GooglePlacesConnectionDelegate;
 
 @interface GooglePlacesConnection : NSObject
-{
-    NSMutableData       *responseData;
-    NSURLConnection     *connection;
-    BOOL                connectionIsActive;
-    int                 minAccuracyValue;
-    //NEW
-    CLLocationCoordinate2D userLocation;
-}
 
 @property (nonatomic, strong) id <GooglePlacesConnectionDelegate> delegate;
 @property (nonatomic, retain) NSMutableData     *responseData;
