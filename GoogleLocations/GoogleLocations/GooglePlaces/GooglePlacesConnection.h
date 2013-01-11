@@ -30,16 +30,18 @@
     CLLocationCoordinate2D userLocation;
 }
 
-@property (nonatomic, weak) id <GooglePlacesConnectionDelegate> delegate;
+@property (nonatomic, strong) id <GooglePlacesConnectionDelegate> delegate;
 @property (nonatomic, retain) NSMutableData     *responseData;
 @property (nonatomic, retain) NSURLConnection   *connection;
 @property (nonatomic, assign) BOOL              connectionIsActive;
 @property (nonatomic, assign) int               minAccuracyValue;
 //NEW
 @property (nonatomic, assign) CLLocationCoordinate2D userLocation;
+@property (nonatomic, strong) NSString *apiKey;
+
 
 // useful functions
--(id)initWithDelegate:(id)del;
+- (id)initWithDelegate:(id <GooglePlacesConnectionDelegate>)del andApiKey:(NSString *)apiKey;
 
 -(void)getGoogleObjectsWithQuery:(NSString *)query 
                   andCoordinates:(CLLocationCoordinate2D)coords 
