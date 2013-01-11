@@ -16,7 +16,8 @@
 // limitations under the License.
 
 #import "GooglePlacesConnection.h"
-#import "define.h"
+#import "MKNetworkKit.h"
+#import "JSONKit.h"
 
 @implementation GooglePlacesConnection
 
