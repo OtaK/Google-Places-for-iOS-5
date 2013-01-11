@@ -1,0 +1,6 @@
+[submodule "GoogleLocations/GoogleLocations/GooglePlaces/Libs/JSONKit"]
+	path = GoogleLocations/GoogleLocations/GooglePlaces/Libs/JSONKit
+	url = git://github.com/johnezang/JSONKit.git
+[submodule "GoogleLocations/GoogleLocations/GooglePlaces/Libs/MKNetworkKit"]
+	path = GoogleLocations/GoogleLocations/GooglePlaces/Libs/MKNetworkKit
+	url = git://github.com/MugunthKumar/MKNetworkKit.git
