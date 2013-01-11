@@ -54,7 +54,7 @@
     double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
     
-    types = [types urlEncodedString];
+    types = [types mk_urlEncodedString];
     
     NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=50000&types=%@&sensor=true&language=%@&key=%@",
                                     centerLat, centerLng, types, [[NSLocale preferredLanguages] objectAtIndex:0], GOOGLE_API_KEY];
@@ -89,8 +89,8 @@
 	double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
     
-    query = [query urlEncodedString];
-    types = [types urlEncodedString];
+    query = [query mk_urlEncodedString];
+    types = [types mk_urlEncodedString];
     
     NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?location=%f,%f&radius=50000&types=%@&query=%@&sensor=true&language=%@&key=%@",
                                     centerLat, centerLng, types, query, [[NSLocale preferredLanguages] objectAtIndex:0], GOOGLE_API_KEY];
