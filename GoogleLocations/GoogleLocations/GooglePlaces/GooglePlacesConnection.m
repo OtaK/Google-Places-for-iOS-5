@@ -21,13 +21,6 @@
 
 @implementation GooglePlacesConnection
 
-@synthesize delegate;
-@synthesize responseData;
-@synthesize connection;
-@synthesize connectionIsActive;
-@synthesize minAccuracyValue;
-//NEW
-@synthesize userLocation;
 
 - (id)initWithDelegate:(id <GooglePlacesConnectionDelegate>)del
 {
